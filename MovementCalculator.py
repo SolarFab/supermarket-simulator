@@ -2,8 +2,7 @@ import pandas as pd
 import numpy as np
 import datetime
 
-class SupermarketCalculator:
-
+class MovementCalculator:
     """
     This class reflects the logic of the supermarket based on data how customers move
     around the supermarket
@@ -98,48 +97,5 @@ class SupermarketCalculator:
         return(prob)
 
  
-    # def import_clean_csv(self):
-    #     """
-    #     imports the respective weekday csv and cleans the data:
-    #     - adds checkout and timestamp for customers which have not checkout
 
-    #     """
-    #     df = pd.DataFrame()
-    #     counter = 0
-    #     number_of_cust = 0
-        
-    #     # read the single .csv files by a loop
-    #     for weekday in ["monday","tuesday","wednesday","thursday","friday"]:
-    #         df_weekday = pd.DataFrame()
-    #         df_weekday = pd.read_csv(f"./data/{weekday}.csv",sep = ";", index_col = 0, parse_dates=True )
-            
-    #         if weekday!="monday": #if the weekday is monday, the counter stays zero, since no data from the previous day need to be added
-    #             df_weekday["customer_no"] =  df_weekday["customer_no"] + counter
-            
-    #         # set a counter, which counts the customers of the previous days and than adds them to currently loaded customer file.
-    #         counter += df_weekday["customer_no"].nunique()   
-            
-    #         # Check which customer have not checkout
-    #         df_no_dup=df_weekday.drop_duplicates(subset=['customer_no'],keep='last')
-    #         df_no_dup = df_no_dup.loc[(df_no_dup["location"]!="checkout")]
-        
-    #         # create a DF coLumn whcih contains onLy "checkout" 
-    #         checkout_list = []
-    #         for i in range(0,len(df_no_dup)):
-    #             checkout_list.append("checkout")
-    #         checkout_list
-    #         df_no_dup["location"] = checkout_list
-
-    #         # create a list with timestamp of the date and last hour 22:00:00
-    #         time_list = []
-    #         for i in range(0,len(df_no_dup)):
-    #             time_list.append(datetime.datetime.combine(df_no_dup.index[0].date(), 
-    #                                 datetime.time(22, 0,0)))
-
-    #         # resets the index of the checkout-df to the date and 22:00:00
-    #         df_no_dup.index=time_list
-        
-    #         df_weekday = pd.concat([df_weekday,df_no_dup])
-    #         df = pd.concat([df,df_weekday]) 
-    #     self.df = df
 

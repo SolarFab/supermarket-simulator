@@ -1,4 +1,4 @@
-from SupermarketCalculator import SupermarketCalculator
+from MovementCalculator import MovementCalculator
 import numpy as np
 import pandas as pd
 from faker import Faker
@@ -38,7 +38,7 @@ class Customer:
         This method defines the starting location of the customer and assigns it as an attribute: self_location
         """
         ### Defines the starting locaiton of the customer
-        m = SupermarketCalculator()  #initiates the Class
+        m = MovementCalculator()  #initiates the Class
         starting_prob = m.calc_starting_prob() #receives a list with the probabilities at which location to start
         start_location = np.random.choice(["dairy","drinks","fruit","spices"], size=1, p=starting_prob)[0] #return the start_location
         self.location = start_location
@@ -50,7 +50,7 @@ class Customer:
         and assigns it as an attribute: self.matrix
         """
         ### Assign the trans_matrix as a attribute to the customer
-        m = SupermarketCalculator() #initiates the class
+        m = MovementCalculator() #initiates the class
         trans_matrix = m.calc_trans_matrix() #calls the trans_matrix
         self.matrix = trans_matrix
 

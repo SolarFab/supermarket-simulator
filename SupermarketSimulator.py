@@ -1,8 +1,7 @@
 """
 Simulates the supermarket and let's customer move around the different supermarkt departments.
-Creates a .csv file which tracks the movements. 
+Creates a .csv file which tracks the movements.
 """
-
 import numpy as np
 import pandas as pd
 from CustomerSimulator import Customer
@@ -14,17 +13,17 @@ from datetime import timedelta
 class Supermarket:
     """manages multiple Customer instances that are currently in the market.
     """
-    def __init__(self):        
+    def __init__(self):
         self.time = ""
         self.list_of_customers = [] # list of customers currently in the supermarket
         self.number_of_customers = 0
         self.csv_list = []
-        
+ 
     def open_supermarket(self):
         """Initiate the supermarket
         """
         self.time = datetime.now()
-        for time_step in range(40):
+        for time_step in range(50):
             self.time = self.time + timedelta(minutes=1)
             self.add_new_customers()
             self.fill_csv()
@@ -46,29 +45,16 @@ class Supermarket:
         """
         for customer in self.list_of_customers:
             customer.next_location()
-                 
-    # def checkout_customers(self):
-    #     """checks which customers are currently at checkout point and 
-    #     deletes these from the list_of_customers.        
-    #     """
-	#     ids_to_delete = []
-
-	#     for customer_id, customer in enumerate(self.list_of_customers):
-	#     	if customer.location == 'checkout':
-	#     		ids_to_delete.append(customer_id)
-	#     ids_to_delete.reverse()
-	#     for customer_id in ids_to_delete:
-	#     	del self.list_of_customers[customer_id]
 
     def checkout_customers(self):
-            ids_to_delete = []
-            for customer_id, customer in enumerate(self.list_of_customers):
-                if customer.location == 'checkout':
-                    ids_to_delete.append(customer_id)
-            ids_to_delete.reverse()
-            for customer_id in ids_to_delete:
-                #print(self.list_of_customers[customer_id])
-                del self.list_of_customers[customer_id]
+        ids_to_delete = []
+        for customer_id, customer in enumerate(self.list_of_customers):
+            if customer.location == 'checkout':
+                ids_to_delete.append(customer_id)
+        ids_to_delete.reverse()
+        for customer_id in ids_to_delete:
+            #print(self.list_of_customers[customer_id])
+            del self.list_of_customers[customer_id]
 
     def fill_csv(self):
         "Creates a csv list wich tracks the time and location of the movement of customers "
@@ -77,6 +63,7 @@ class Supermarket:
     
     def save_csv(self):
         df = pd.DataFrame(self.csv_list)
+        df.columns = [ 'datetime', 'customer_name', 'department']
         df.to_csv("./supermarket.csv")
 
 
